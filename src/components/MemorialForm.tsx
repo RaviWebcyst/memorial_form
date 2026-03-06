@@ -113,16 +113,16 @@ const MemorialForm = () => {
               )}
 
               <div className="mt-5 pt-4 border-top w-100">
-                <div className="d-flex justify-content-center flex-wrap align-items-center mb-3" style={{ gap: '8px', minHeight: '40px' }}>
+                {/* <div className="d-flex justify-content-center flex-wrap align-items-center mb-3" style={{ gap: '8px', minHeight: '40px' }}>
                   {Array.from({ length: Math.min(candleCount, 7) }).map((_, i) => (
                     <span key={i} style={{ fontSize: '1.8rem', animationDelay: `${i * 200}ms` }} className="candle-pulse">🕯️</span>
                   ))}
                   {candleCount > 7 && (
                     <span className="text-muted ms-2" style={{ fontSize: '0.9rem', fontWeight: 600 }}>+{candleCount - 7}</span>
                   )}
-                </div>
+                </div> */}
 
-                <div className="d-flex justify-content-center w-100">
+                {/* <div className="d-flex justify-content-center w-100">
                   <button
                     onClick={handleLightCandle}
                     className="btn btn-lg d-inline-flex align-items-center justify-content-center px-4 py-2 border-0 w-100 transition-all"
@@ -135,7 +135,7 @@ const MemorialForm = () => {
                       </span>
                     )}
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div className="mt-3 pt-2 w-100">
@@ -154,7 +154,7 @@ const MemorialForm = () => {
     <div className="d-flex flex-column align-items-center justify-content-center mt-5 w-100 mb-5 px-3">
       <Toaster />
       <div className="text-center mb-4">
-        <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '8px' }}>🕯️</span>
+        {/* <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '8px' }}>🕯️</span> */}
         <h1 className="fw-bold m-0" style={{ fontSize: '2.2rem', fontFamily: 'serif', color: '#1f2937' }}>Create a Memorial</h1>
         <p className="text-muted mt-2 mb-0" style={{ fontSize: '1rem' }}>Honor and remember a loved one</p>
       </div>
