@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import type { MemorialData } from '../types/memorial'
+import toast, { Toaster } from 'react-hot-toast'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './MemorialForm.css'
 import CandleButton from './CandleButton'
@@ -34,11 +35,28 @@ const MemorialForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+
+    // Explicit Validation Check as requested
+    if (!formData.name.trim() || !formData.birthDate || !formData.deathDate || !formData.bio.trim() || !formData.photo) {
+      toast.error('Please fill out all required fields and upload a photo.', {
+        position: 'top-center'
+      })
+      return
+    }
+
     setIsSubmitted(true)
+    toast.success('Memorial successfully created! 🕊️', {
+      position: 'top-center',
+      duration: 3000
+    })
   }
 
   const handleLightCandle = () => {
     setCandleCount(prev => prev + 1)
+    toast.success('A candle has been lit. 🕯️', {
+      position: 'top-center',
+      icon: '🕯️'
+    })
   }
 
   const handleReset = () => {
@@ -63,6 +81,7 @@ const MemorialForm = () => {
   if (isSubmitted) {
     return (
       <div className="d-flex flex-column align-items-center justify-content-center mt-5 w-100 mb-5 px-3">
+        <Toaster />
         <div className="w-100" style={{ maxWidth: '448px' }}>
           <div className="card shadow-lg border-0 text-center d-flex flex-column align-items-center p-0 overflow-hidden" style={{ backgroundColor: '#ffffff', borderRadius: '1rem' }}>
 
@@ -133,7 +152,7 @@ const MemorialForm = () => {
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5 w-100 mb-5 px-3">
-
+      <Toaster />
       <div className="text-center mb-4">
         <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '8px' }}>🕯️</span>
         <h1 className="fw-bold m-0" style={{ fontSize: '2.2rem', fontFamily: 'serif', color: '#1f2937' }}>Create a Memorial</h1>
@@ -194,7 +213,7 @@ const MemorialForm = () => {
             <div className="row mb-4">
               <div className="col-6 text-start">
                 <label htmlFor="birthDate" className="form-label fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
-                  Date of Birth
+                  Date of Birth <span className="text-danger">*</span>
                 </label>
                 <DatePicker
                   id="birthDate"
@@ -206,12 +225,13 @@ const MemorialForm = () => {
                   placeholderText="Select date"
                   maxDate={new Date()}
                   dateFormat="yyyy-MM-dd"
+                  required
                 />
               </div>
 
               <div className="col-6 text-start">
                 <label htmlFor="deathDate" className="form-label fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
-                  Date of Passing
+                  Date of Passing <span className="text-danger">*</span>
                 </label>
                 <DatePicker
                   id="deathDate"
@@ -223,6 +243,7 @@ const MemorialForm = () => {
                   placeholderText="Select date"
                   maxDate={new Date()}
                   dateFormat="yyyy-MM-dd"
+                  required
                 />
               </div>
             </div>
@@ -230,7 +251,7 @@ const MemorialForm = () => {
             {/* Biography */}
             <div className="mb-4 text-start">
               <label htmlFor="bio" className="form-label fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
-                Short Biography
+                Short Biography <span className="text-danger">*</span>
               </label>
               <textarea
                 id="bio"
@@ -241,6 +262,7 @@ const MemorialForm = () => {
                 rows={4}
                 className="form-control"
                 style={{ borderRadius: '0.5rem', borderColor: '#e5e7eb', boxShadow: 'none', padding: '12px' }}
+                required
               />
             </div>
 
